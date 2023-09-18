@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "157758568266",
+    "project_id": "finaltechsprint",
+    "storage_bucket": "finaltechsprint.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157758568266:android:5a05f0dedea30f6cabf3b3",
+        "android_client_info": {
+          "package_name": "com.example.techsprint"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnwalOetw-AabZr18e6j6YLizlRxwXNts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
