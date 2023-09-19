@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FindYourCase">
+    tools:context=".MainActivity">
 
 
     <ImageView
@@ -20,8 +20,8 @@
 
 
 
-    <TextView
-        android:id="@+id/textView"
+    <EditText
+        android:id="@+id/caseIdEditText"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="154dp"
@@ -30,25 +30,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="-25dp"></TextView>
+        tools:layout_editor_absoluteX="-25dp"></EditText>
 
     <Button
-        android:id="@+id/searchBtn"
+        android:id="@+id/caseSearchButton"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_marginBottom="64dp"
         android:text="Search your case"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/caseIdEditText"
         app:layout_constraintVertical_bias="0.343" />
 
     <Button
         android:id="@+id/logoutbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/white"
         android:text="logOut"
         android:textColor="#ff0000"
         app:layout_constraintBottom_toBottomOf="parent"

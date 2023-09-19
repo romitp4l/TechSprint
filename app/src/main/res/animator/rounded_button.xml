@@ -1,0 +1,15 @@
+<!-- res/drawable/rounded_button.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#FF5722" /> <!-- Button color when pressed -->
+            <corners android:radius="24dp" /> <!-- Rounded corners -->
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FF9800" /> <!-- Default button color -->
+            <corners android:radius="24dp" /> <!-- Rounded corners -->
+        </shape>
+    </item>
+</selector>

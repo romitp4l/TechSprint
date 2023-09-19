@@ -33,10 +33,11 @@ public class AddDataToCase extends AppCompatActivity {
 
 
         // fetching data from firebase to show in the recycler view
-        //recyclerView
+        //recyclerViewth
 
         String message = writeMessage.getText().toString();
 
+//  writeMessage.setText("Made with love from by the team TechSprint");
 
 
     }

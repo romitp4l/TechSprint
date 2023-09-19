@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    void loginUser(){
+     public void loginUser(){
         String email  = emailEditText.getText().toString();
         String password  = passwordEditText.getText().toString();
 
