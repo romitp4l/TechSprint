@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Techsprint"
         tools:targetApi="31">
         <activity
+            android:name=".AddDataToCase"
+            android:exported="false" />
+        <activity
             android:name=".FindYourCase"
             android:exported="false" />
         <activity
