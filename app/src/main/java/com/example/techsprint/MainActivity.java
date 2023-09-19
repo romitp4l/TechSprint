@@ -15,7 +15,9 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -25,14 +27,17 @@ public class MainActivity extends AppCompatActivity {
     private  Button logOut  ;
     FirebaseAuth auth ;
 
-    private EditText caseId ;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String userEmail = user.getEmail();
+
+    private EditText caseId ,department ;
     private Button caseSearchButton;
 
     private FirebaseFirestore db;
     private DocumentReference documentReference;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -45,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         // case search activity
 
         caseId = findViewById(R.id.caseIdEditText);
+
+        department =findViewById(R.id.departmentEditText);
 
         db = FirebaseFirestore.getInstance();
 
@@ -69,47 +76,48 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this,AddDataToCase.class));
     }
 
+
+
     void casesearchFunction() {
+        String dataString = caseId.getText().toString();
+        String departmentName = department.getText().toString();
 
-        void casesearchFunction() {
-            String dataString = caseId.getText().toString();
+        if (!dataString.isEmpty()) {
+            // Reference to the Firestore document
+            DocumentReference documentReference = db.collection(departmentName).document(dataString);
 
-            if (!dataString.isEmpty()) {
-                // Use the EditText value as the document name
-                documentReference = db.collection("romit").document(dataString);
+            // Create a data map for the new entry
+            Map<String, Object> newDataMap = new HashMap<>();
+            newDataMap.put("data_key", dataString);
+            newDataMap.put("department", departmentName);
+            newDataMap.put("user_email", userEmail);
+            newDataMap.put("timestamp", FieldValue.serverTimestamp());
 
-                // Create a data map
-                Map<String, Object> dataMap = new HashMap<>();
-                dataMap.put("data_key", dataString);
-
-                // Upload the data to Firestore
-                documentReference
-                        .set(dataMap)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                // Data uploaded successfully
-                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                                Toast.makeText(MainActivity.this, "Document snapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(MainActivity.this, AddDataToCase.class));
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Handle errors here
-                                Log.w(TAG, "Error adding document", e);
-                                Toast.makeText(MainActivity.this, "Error adding document", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            } else {
-                // Handle empty input
-                Toast.makeText(this, "Please enter data in the input field", Toast.LENGTH_SHORT).show();
-            }
+            // Add the new entry to a subcollection named "entries"
+            documentReference.collection("entries")
+                    .add(newDataMap)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            // Data added successfully
+                            Log.d(TAG, "New entry added with ID: " + documentReference.getId());
+                            Toast.makeText(MainActivity.this, "New entry added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this, AddDataToCase.class));
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Handle errors here
+                            Log.w(TAG, "Error adding new entry", e);
+                            Toast.makeText(MainActivity.this, "Error adding new entry", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            // Handle empty input
+            Toast.makeText(this, "Please enter data in the input field", Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
+
 
 }

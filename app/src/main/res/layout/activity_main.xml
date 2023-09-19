@@ -11,39 +11,36 @@
         android:id="@+id/imageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/logo" />
-
-
 
     <EditText
         android:id="@+id/caseIdEditText"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="154dp"
-        android:textSize="40dp"
         android:hint="Enter your case id"
+        android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="-25dp"></EditText>
+        app:layout_constraintVertical_bias="0.347"
+        tools:layout_editor_absoluteX="16dp"></EditText>
 
     <Button
         android:id="@+id/caseSearchButton"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_width="379dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="64dp"
         android:text="Search your case"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/caseIdEditText"
-        app:layout_constraintVertical_bias="0.343" />
+        app:layout_constraintVertical_bias="0.846" />
 
     <Button
         android:id="@+id/logoutbtn"
@@ -58,5 +55,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.046"></Button>
+
+    <EditText
+        android:id="@+id/departmentEditText"
+        android:layout_width="336dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="60dp"
+        android:text="Department Name "
+        app:layout_constraintBottom_toTopOf="@+id/caseIdEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
