@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                             // Data added successfully
                             Log.d(TAG, "New entry added with ID: " + documentReference.getId());
                             Toast.makeText(MainActivity.this, "New entry added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this, AddDataToCase.class));
+                            startActivity(new Intent(MainActivity.this, CaseDetailsActivity.class));
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

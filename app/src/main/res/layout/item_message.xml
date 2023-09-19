@@ -8,7 +8,7 @@
 
     <!-- Sender's Email -->
     <TextView
-        android:id="@+id/senderTextView"
+        android:id="@+id/senderEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sender's Email"
@@ -18,7 +18,7 @@
 
     <!-- Message Text -->
     <TextView
-        android:id="@+id/messageTextView"
+        android:id="@+id/messageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Message Text"
@@ -27,7 +27,7 @@
 
     <!-- Timestamp -->
     <TextView
-        android:id="@+id/timestampTextView"
+        android:id="@+id/timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Timestamp"
