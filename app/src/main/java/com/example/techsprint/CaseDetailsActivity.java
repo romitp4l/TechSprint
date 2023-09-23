@@ -1,7 +1,6 @@
 package com.example.techsprint;
 
 import android.os.Bundle;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,9 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.*;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CaseDetailsActivity extends AppCompatActivity {
 
@@ -40,10 +37,20 @@ public class CaseDetailsActivity extends AppCompatActivity {
     private List<Message> messageList;
     private MessageAdapter messageAdapter;
 
+    private String departmentName = "";
+    private String dataString = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_case_details);
+
+        // Retrieve extras from MainActivity
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            departmentName = extras.getString("departmentName", "");
+            dataString = extras.getString("dataString", "");
+        }
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -62,13 +69,11 @@ public class CaseDetailsActivity extends AppCompatActivity {
         messageAdapter = new MessageAdapter(messageList);
         recyclerView.setAdapter(messageAdapter);
 
-        // Get the case document reference (Replace "departmentName" and "dataString" with actual values)
-        String departmentName = "your_department_name";
-        String dataString = "your_data_string";
+        // Get the case document reference
         caseDocumentRef = db.collection(departmentName).document(dataString);
 
         // Load existing messages
-        loadMessages();
+        loadMessages(departmentName, dataString);
 
         newMessageEditText = findViewById(R.id.newMessageEditText);
         sendMessageButton = findViewById(R.id.sendMessageButton);
@@ -78,17 +83,23 @@ public class CaseDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String messageText = newMessageEditText.getText().toString().trim();
                 if (!messageText.isEmpty()) {
-                    addMessageToFirestore(messageText);
+                    addMessageToFirestore(messageText, dataString);
                     newMessageEditText.setText(""); // Clear the input field after sending the message
                 }
             }
         });
     }
 
-    private void loadMessages() {
+    private void loadMessages(String department, String caseId) {
+        // Reference to the Firestore document for the specific case ID in the department
+        DocumentReference caseDocumentRef = db.collection(department)
+                .document(caseId);
+
+        // Reference to the "messages" subcollection
+        CollectionReference messagesRef = caseDocumentRef.collection("messages");
+
         // Query Firestore to fetch existing messages and add them to messageList
-        caseDocumentRef.collection("entries")
-                .orderBy("timestamp", Query.Direction.ASCENDING)
+        messagesRef.orderBy("timestamp", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -108,12 +119,16 @@ public class CaseDetailsActivity extends AppCompatActivity {
                 });
     }
 
-    private void addMessageToFirestore(String messageText) {
+
+    private void addMessageToFirestore(String messageText, String caseId) {
         // Create a new Message object
         Message newMessage = new Message(messageText, userEmail, new Date());
 
-        // Add the new message to Firestore under the "entries" subcollection
-        caseDocumentRef.collection("entries")
+        // Create the Firestore document reference for the specific chat room (case)
+        DocumentReference chatRoomRef = db.collection(departmentName).document(caseId);
+
+        // Add the new message to the "messages" subcollection of the chat room
+        chatRoomRef.collection("messages")
                 .add(newMessage)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

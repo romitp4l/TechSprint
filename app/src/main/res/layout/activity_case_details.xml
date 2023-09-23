@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@drawable/main_back"
     tools:context=".CaseDetailsActivity">
 
     <!-- RecyclerView to display messages -->

@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/case_search"
+
     tools:context=".MainActivity">
+
 
 
     <ImageView
@@ -27,20 +30,20 @@
         android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.347"
-        tools:layout_editor_absoluteX="16dp"></EditText>
+        app:layout_constraintVertical_bias="0.107"
+        tools:layout_editor_absoluteX="-16dp"></EditText>
 
     <Button
         android:id="@+id/caseSearchButton"
-        android:layout_width="379dp"
-        android:layout_height="45dp"
+        android:layout_width="371dp"
+        android:layout_height="62dp"
         android:layout_marginBottom="64dp"
         android:text="Search your case"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/caseIdEditText"
-        app:layout_constraintVertical_bias="0.846" />
+        app:layout_constraintVertical_bias="0.522" />
 
     <Button
         android:id="@+id/logoutbtn"
@@ -58,13 +61,15 @@
 
     <EditText
         android:id="@+id/departmentEditText"
-        android:layout_width="336dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="60dp"
+        android:layout_width="353dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="48dp"
         android:hint="Department Name"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/caseIdEditText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.275"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
