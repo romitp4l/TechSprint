@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/case_search"
+    android:background="@drawable/mainnewback"
 
     tools:context=".MainActivity">
 
@@ -19,7 +19,8 @@
         app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/logo" />
+        tools:srcCompat="@drawable/logo"
+        android:visibility="visible"/>
 
     <EditText
         android:id="@+id/caseIdEditText"
